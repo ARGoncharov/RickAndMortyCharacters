@@ -1,7 +1,7 @@
 <template lang="pug">
   .page.content
-    SearchBar
-    .characters-block(v-for="(character, index) in characters" :key="index")
+    SearchBar(@search="handleSearch")
+    .characters-block(v-for="character in filterSearch" :key="character")
       img(:src="character.image")
       div.characters-name {{ character.name }}
       div.characters-gender {{ character.gender }}
@@ -20,6 +20,7 @@ export default {
   },
   data () {
     return {
+      search: '',
       characters: [],
       page: 1,
       hasMore: true
@@ -42,6 +43,16 @@ export default {
     loadMore () {
       this.page++
       this.getCharacters()
+    },
+    handleSearch (search) {
+      this.search = search
+    }
+  },
+  computed: {
+    filterSearch () {
+      return this.characters.filter(character => {
+        return character.name.toLowerCase().includes(this.search.toLowerCase())
+      })
     }
   }
 }

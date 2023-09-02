@@ -1,7 +1,7 @@
 <template lang="pug">
   .search-box
-    input(type="text" v-model="searchQuery" @input="search" placeholder="Search for character..." )
-    a(href="#")
+    input(type="text" v-model="searchTerm" placeholder="Search for character..." )
+    a(href="#" @click="search")
       i.fas.fa-search
 </template>
 
@@ -10,12 +10,12 @@ export default {
   name: 'SearchBar',
   data () {
     return {
-      searchQuery: ''
+      searchTerm: ''
     }
   },
   methods: {
     search () {
-      this.$emit('search', this.searchQuery)
+      this.$emit('search', this.searchTerm)
     }
   }
 }
