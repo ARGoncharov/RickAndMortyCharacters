@@ -1,5 +1,6 @@
 <template lang="pug">
   .page.content
+    SearchBar
     .characters-block(v-for="(character, index) in characters" :key="index")
       img(:src="character.image")
       div.characters-name {{ character.name }}
@@ -10,9 +11,13 @@
 <script>
 
 import axios from 'axios'
+import SearchBar from '@/components/SearchBar.vue'
 
 export default {
   name: 'MainComponent',
+  components: {
+    SearchBar
+  },
   data () {
     return {
       characters: [],
